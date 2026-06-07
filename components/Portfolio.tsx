@@ -1,7 +1,7 @@
 'use client';
 
 import { PortfolioHolding, Asset } from '@/lib/types';
-import { TYPE_COLORS, TYPE_LABELS } from '@/lib/assets';
+import { TYPE_COLORS, TYPE_LABELS, PORTFOLIO_TOTAL_EUR } from '@/lib/assets';
 
 interface PortfolioProps {
   holdings: PortfolioHolding[];
@@ -32,6 +32,9 @@ export default function Portfolio({
       <div className="flex-1 overflow-y-auto mb-6 space-y-2">
         {holdings.map((holding) => {
           const color = TYPE_COLORS[holding.type];
+          const eurValue = (PORTFOLIO_TOTAL_EUR * holding.weight) / 100;
+          const isPositive = holding.dailyChangePct >= 0;
+          const changeColor = isPositive ? '#6BDBCB' : '#F79880';
           return (
             <div
               key={holding.id}
@@ -71,6 +74,16 @@ export default function Portfolio({
                     />
                   </svg>
                 </button>
+              </div>
+
+              {/* EUR value + daily change */}
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-white font-semibold text-sm tabular-nums">
+                  €{eurValue.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                </span>
+                <span className="text-xs font-semibold tabular-nums" style={{ color: changeColor }}>
+                  {isPositive ? '+' : ''}{holding.dailyChangePct.toFixed(1)}% today
+                </span>
               </div>
 
               {/* Weight bar */}

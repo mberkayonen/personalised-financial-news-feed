@@ -6,6 +6,7 @@ export interface Asset {
   name: string;
   type: AssetType;
   searchQuery: string;
+  dailyChangePct: number; // % change vs previous day (mock)
 }
 
 export interface PortfolioHolding extends Asset {

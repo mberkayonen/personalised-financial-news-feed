@@ -6,12 +6,22 @@ import { ALL_ASSETS, DEFAULT_PORTFOLIO_IDS, getAssetById } from '@/lib/assets';
 import Portfolio from '@/components/Portfolio';
 import NewsFeed from '@/components/NewsFeed';
 
+// Rank-based weights: top asset gets most, all differ, none below 10%.
+// Formula: weight_i = 10 + extra * (N-1-rank) / triangularNumber(N-1)
+// where extra = 100 - N*10
 function buildHoldings(assetIds: string[]): PortfolioHolding[] {
-  const weight = assetIds.length > 0 ? 100 / assetIds.length : 0;
-  return assetIds
+  const assets = assetIds
     .map((id) => getAssetById(id))
-    .filter((a): a is Asset => Boolean(a))
-    .map((a) => ({ ...a, weight }));
+    .filter((a): a is Asset => Boolean(a));
+  const n = assets.length;
+  if (n === 0) return [];
+  if (n === 1) return [{ ...assets[0], weight: 100 }];
+  const extra = 100 - n * 10;
+  const triangular = (n * (n - 1)) / 2;
+  return assets.map((a, rank) => ({
+    ...a,
+    weight: 10 + (extra * (n - 1 - rank)) / triangular,
+  }));
 }
 
 export default function Home() {

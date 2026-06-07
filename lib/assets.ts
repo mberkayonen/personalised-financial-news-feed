@@ -17,6 +17,8 @@ export const TYPE_LABELS: Record<AssetType, string> = {
   bond: 'Bond',
 };
 
+export const PORTFOLIO_TOTAL_EUR = 15_000;
+
 // All available assets
 export const ALL_ASSETS: Asset[] = [
   // Default portfolio
@@ -26,6 +28,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'Apple',
     type: 'stock',
     searchQuery: 'Apple Inc AAPL stock',
+    dailyChangePct: 1.2,
   },
   {
     id: 'NVDA',
@@ -33,6 +36,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'NVIDIA',
     type: 'stock',
     searchQuery: 'NVIDIA NVDA stock earnings',
+    dailyChangePct: 3.4,
   },
   {
     id: 'IWDA',
@@ -40,6 +44,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'iShares MSCI World ETF',
     type: 'etf',
     searchQuery: 'MSCI World ETF global equities',
+    dailyChangePct: 0.6,
   },
   {
     id: 'BTC',
@@ -47,6 +52,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'Bitcoin',
     type: 'crypto',
     searchQuery: 'Bitcoin cryptocurrency price',
+    dailyChangePct: -2.1,
   },
   {
     id: 'EURUSD',
@@ -54,6 +60,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'Euro / US Dollar',
     type: 'fx',
     searchQuery: 'Euro dollar exchange rate EUR USD',
+    dailyChangePct: 0.3,
   },
   // Addable assets
   {
@@ -62,6 +69,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'SAP SE',
     type: 'stock',
     searchQuery: 'SAP SE enterprise software stock',
+    dailyChangePct: 0.8,
   },
   {
     id: 'VOW3',
@@ -69,6 +77,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'Volkswagen',
     type: 'stock',
     searchQuery: 'Volkswagen automotive stock',
+    dailyChangePct: -1.5,
   },
   {
     id: 'SPY',
@@ -76,6 +85,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'S&P 500 ETF',
     type: 'etf',
     searchQuery: 'S&P 500 index ETF US equities',
+    dailyChangePct: 0.7,
   },
   {
     id: 'ETH',
@@ -83,6 +93,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'Ethereum',
     type: 'crypto',
     searchQuery: 'Ethereum cryptocurrency ETH',
+    dailyChangePct: 4.2,
   },
   {
     id: 'AMZN',
@@ -90,6 +101,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'Amazon',
     type: 'stock',
     searchQuery: 'Amazon AMZN stock AWS',
+    dailyChangePct: -0.4,
   },
   {
     id: 'TSLA',
@@ -97,6 +109,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'Tesla',
     type: 'stock',
     searchQuery: 'Tesla TSLA electric vehicle stock',
+    dailyChangePct: 2.8,
   },
   {
     id: 'DE10Y',
@@ -104,6 +117,7 @@ export const ALL_ASSETS: Asset[] = [
     name: 'German Bund 10Y',
     type: 'bond',
     searchQuery: 'German government bond Bund yield',
+    dailyChangePct: -0.2,
   },
 ];
 
