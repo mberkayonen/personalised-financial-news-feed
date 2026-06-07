@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Scalable Capital · Personalised Investment Feed',
+  title: 'Scalable Terminal',
   description:
-    'AI-powered newsfeed personalised to your portfolio — a product concept by Berkay Onen.',
+    'Real-time news, market events, and portfolio data aggregated in one place. For information only — not investment advice.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

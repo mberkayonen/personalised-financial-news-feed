@@ -27,6 +27,7 @@ function buildHoldings(assetIds: string[]): PortfolioHolding[] {
 
 export default function Home() {
   const [portfolioIds, setPortfolioIds] = useState<string[]>(DEFAULT_PORTFOLIO_IDS);
+  const [disclaimerOpen, setDisclaimerOpen] = useState(false);
   const [feedItems, setFeedItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [feedError, setFeedError] = useState<string | undefined>();
@@ -79,6 +80,70 @@ export default function Home() {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden" style={{ backgroundColor: '#101112' }}>
+      {/* Legal Disclaimer Modal */}
+      {disclaimerOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-6"
+          style={{ backgroundColor: 'rgba(0,0,0,0.7)' }}
+          onClick={() => setDisclaimerOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-lg rounded-2xl p-8"
+            style={{ backgroundColor: '#1A1B1C', border: '1px solid #2A2B2C' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setDisclaimerOpen(false)}
+              className="absolute top-4 right-4 w-7 h-7 rounded-full flex items-center justify-center transition-opacity hover:opacity-70"
+              style={{ backgroundColor: '#2A2B2C', color: '#CFCFD0' }}
+            >
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 2L8 8M8 2L2 8" stroke="#CFCFD0" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
+
+            <h2 className="text-white font-bold text-lg mb-1">Legal Disclaimer</h2>
+            <p className="text-xs mb-5" style={{ color: '#404141' }}>Please read before using Scalable Terminal</p>
+
+            <div className="space-y-4 text-sm leading-relaxed" style={{ color: '#B5BAD7' }}>
+              <p>
+                Scalable Terminal is an information aggregation tool. All content displayed — including
+                news articles, market data, portfolio values, daily price changes, and corporate events —
+                is sourced from third-party providers and presented solely for informational purposes.
+              </p>
+              <p>
+                Nothing on this platform constitutes investment advice, a recommendation to buy or sell
+                any financial instrument, or an offer or solicitation to participate in any investment
+                strategy. The data shown may be delayed, incomplete, or inaccurate, and should not be
+                relied upon for making financial decisions.
+              </p>
+              <p>
+                Investing in financial markets involves risk, including the possible loss of the principal
+                amount invested. Past performance of any asset, index, or strategy is not a guarantee or
+                reliable indicator of future results. The value of investments can go down as well as up.
+              </p>
+              <p>
+                Before making any investment decision, you should seek independent financial advice from a
+                qualified professional and consider whether any investment is appropriate for your personal
+                circumstances, financial situation, and objectives.
+              </p>
+              <p style={{ color: '#404141' }}>
+                Scalable Capital GmbH is regulated by BaFin (Bundesanstalt für Finanzdienstleistungsaufsicht).
+                This tool is a proof-of-concept prototype and does not represent a live or regulated product.
+              </p>
+            </div>
+
+            <button
+              onClick={() => setDisclaimerOpen(false)}
+              className="mt-6 w-full py-2.5 rounded-xl text-sm font-semibold transition-opacity hover:opacity-80"
+              style={{ backgroundColor: '#2A2B2C', color: '#CFCFD0' }}
+            >
+              I understand
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header
         className="flex items-center justify-between px-6 py-4 border-b"
@@ -96,19 +161,20 @@ export default function Home() {
             />
           </svg>
           <div>
-            <span className="font-bold text-white text-sm">Scalable Capital</span>
+            <span className="font-bold text-white text-sm">Scalable Terminal</span>
             <span className="text-xs block" style={{ color: '#404141' }}>
-              Personalised Investment Feed · POC
+              News, events, and portfolio data in one place
             </span>
           </div>
         </div>
 
-        <div
-          className="text-xs px-3 py-1.5 rounded-full font-medium"
-          style={{ backgroundColor: '#6BDBCB20', color: '#6BDBCB', border: '1px solid #6BDBCB30' }}
+        <button
+          onClick={() => setDisclaimerOpen(true)}
+          className="text-xs px-3 py-1.5 rounded-full font-medium transition-opacity hover:opacity-80"
+          style={{ backgroundColor: '#F7988015', color: '#F79880', border: '1px solid #F7988030' }}
         >
-          Concept by Berkay Onen
-        </div>
+          Legal Disclaimer
+        </button>
       </header>
 
       {/* Intro banner */}
@@ -116,12 +182,8 @@ export default function Home() {
         className="px-6 py-3 text-xs"
         style={{ backgroundColor: '#ABB6FF10', borderBottom: '1px solid #ABB6FF20', color: '#B5BAD7' }}
       >
-        <strong style={{ color: '#ABB6FF' }}>How it works:</strong> This feed is personalised to
-        Alex&apos;s portfolio. Add or remove assets on the left — weights recalculate in real time
-        and the feed updates to reflect what matters most to you.{' '}
-        <span style={{ color: '#404141' }}>
-          Powered by Claude AI + live financial news.
-        </span>
+        Live news and shareholder events filtered to your holdings. Adjust your portfolio on the left to change what you see.{' '}
+        <span style={{ color: '#404141' }}>For information only — not investment advice.</span>
       </div>
 
       {/* Main layout */}
