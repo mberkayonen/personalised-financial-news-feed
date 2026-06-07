@@ -29,7 +29,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'Apple Inc AAPL stock',
     dailyChangePct: 1.2,
-    logoUrl: 'https://logo.clearbit.com/apple.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=apple.com&sz=64',
   },
   {
     id: 'NVDA',
@@ -38,7 +38,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'NVIDIA NVDA stock earnings',
     dailyChangePct: 3.4,
-    logoUrl: 'https://logo.clearbit.com/nvidia.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=nvidia.com&sz=64',
   },
   {
     id: 'IWDA',
@@ -47,7 +47,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'etf',
     searchQuery: 'MSCI World ETF global equities',
     dailyChangePct: 0.6,
-    logoUrl: 'https://logo.clearbit.com/ishares.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=ishares.com&sz=64',
   },
   {
     id: 'BTC',
@@ -74,7 +74,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'SAP SE enterprise software stock',
     dailyChangePct: 0.8,
-    logoUrl: 'https://logo.clearbit.com/sap.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=sap.com&sz=64',
   },
   {
     id: 'VOW3',
@@ -83,7 +83,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'Volkswagen automotive stock',
     dailyChangePct: -1.5,
-    logoUrl: 'https://logo.clearbit.com/volkswagen.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=volkswagen.com&sz=64',
   },
   {
     id: 'SPY',
@@ -92,7 +92,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'etf',
     searchQuery: 'S&P 500 index ETF US equities',
     dailyChangePct: 0.7,
-    logoUrl: 'https://logo.clearbit.com/ssga.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=ssga.com&sz=64',
   },
   {
     id: 'ETH',
@@ -110,7 +110,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'Amazon AMZN stock AWS',
     dailyChangePct: -0.4,
-    logoUrl: 'https://logo.clearbit.com/amazon.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=amazon.com&sz=64',
   },
   {
     id: 'TSLA',
@@ -119,7 +119,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'Tesla TSLA electric vehicle stock',
     dailyChangePct: 2.8,
-    logoUrl: 'https://logo.clearbit.com/tesla.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=tesla.com&sz=64',
   },
   {
     id: 'DE10Y',

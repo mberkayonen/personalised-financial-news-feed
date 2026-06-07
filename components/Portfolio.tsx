@@ -18,13 +18,17 @@ function AssetIcon({ holding }: { holding: PortfolioHolding }) {
 
   if (holding.logoUrl && !imgFailed) {
     return (
-      <img
-        src={holding.logoUrl}
-        alt={holding.name}
-        className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+      <div
+        className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden"
         style={{ backgroundColor: '#fff' }}
-        onError={() => setImgFailed(true)}
-      />
+      >
+        <img
+          src={holding.logoUrl}
+          alt={holding.name}
+          className="w-6 h-6 object-contain"
+          onError={() => setImgFailed(true)}
+        />
+      </div>
     );
   }
 
