@@ -68,16 +68,6 @@ export default function NewsCard({ item, holdings }: NewsCardProps) {
               {item.assetId}
             </span>
           )}
-          <span
-            className="text-xs px-1.5 py-0.5 rounded"
-            style={{
-              backgroundColor: `${borderColor}20`,
-              color: borderColor,
-              fontWeight: 600,
-            }}
-          >
-            {sentimentIcon} {item.sentiment.charAt(0).toUpperCase() + item.sentiment.slice(1)}
-          </span>
         </div>
         {item.publishedAt && (
           <span className="text-xs" style={{ color: '#404141' }}>
