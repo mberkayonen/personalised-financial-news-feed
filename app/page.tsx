@@ -129,6 +129,12 @@ export default function Home() {
                 qualified professional and consider whether any investment is appropriate for your personal
                 circumstances, financial situation, and objectives.
               </p>
+              <p>
+                Parts of this tool are powered by artificial intelligence, including AI-generated news
+                summaries and portfolio overviews. AI-generated content may contain errors, omissions, or
+                inaccuracies. You should always verify information by reading the original source articles
+                linked within each news item before drawing any conclusions.
+              </p>
               <p style={{ color: '#404141' }}>
                 Scalable Capital GmbH is regulated by BaFin (Bundesanstalt für Finanzdienstleistungsaufsicht).
                 This tool is a proof-of-concept prototype and does not represent a live or regulated product.
