@@ -5,6 +5,7 @@ import NewsCard from './NewsCard';
 
 interface NewsFeedProps {
   items: NewsItem[];
+  executiveSummary: string;
   loading: boolean;
   holdings: PortfolioHolding[];
   error?: string;
@@ -29,7 +30,7 @@ function SkeletonCard() {
   );
 }
 
-export default function NewsFeed({ items, loading, holdings, error }: NewsFeedProps) {
+export default function NewsFeed({ items, executiveSummary, loading, holdings, error }: NewsFeedProps) {
   return (
     <div className="flex flex-col h-full">
       {/* Feed header */}
@@ -52,6 +53,36 @@ export default function NewsFeed({ items, loading, holdings, error }: NewsFeedPr
           </div>
         )}
       </div>
+
+      {/* Executive Summary */}
+      {(executiveSummary || loading) && (
+        <div
+          className="rounded-xl p-4 mb-4"
+          style={{ backgroundColor: '#1A1B1C', border: '1px solid #2A2B2C' }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="7" cy="7" r="6" stroke="#ABB6FF" strokeWidth="1.2" />
+              <rect x="6.4" y="6" width="1.2" height="4.5" rx="0.6" fill="#ABB6FF" />
+              <circle cx="7" cy="4" r="0.8" fill="#ABB6FF" />
+            </svg>
+            <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: '#ABB6FF' }}>
+              Executive Summary
+            </span>
+          </div>
+          {loading && !executiveSummary ? (
+            <div className="space-y-2 animate-pulse">
+              <div className="h-3 w-full rounded" style={{ backgroundColor: '#2A2B2C' }} />
+              <div className="h-3 w-5/6 rounded" style={{ backgroundColor: '#2A2B2C' }} />
+              <div className="h-3 w-4/6 rounded" style={{ backgroundColor: '#2A2B2C' }} />
+            </div>
+          ) : (
+            <p className="text-sm leading-relaxed" style={{ color: '#B5BAD7' }}>
+              {executiveSummary}
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Error state */}
       {error && !loading && (

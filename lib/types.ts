@@ -30,5 +30,6 @@ export interface NewsItem {
 
 export interface FeedResponse {
   items: NewsItem[];
+  executiveSummary?: string;
   error?: string;
 }

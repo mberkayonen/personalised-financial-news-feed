@@ -29,6 +29,7 @@ export default function Home() {
   const [portfolioIds, setPortfolioIds] = useState<string[]>(DEFAULT_PORTFOLIO_IDS);
   const [disclaimerOpen, setDisclaimerOpen] = useState(false);
   const [feedItems, setFeedItems] = useState<NewsItem[]>([]);
+  const [executiveSummary, setExecutiveSummary] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [feedError, setFeedError] = useState<string | undefined>();
   const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -50,6 +51,7 @@ export default function Home() {
         setFeedError(data.error ?? 'Something went wrong. Please try again.');
       } else {
         setFeedItems(data.items ?? []);
+        setExecutiveSummary(data.executiveSummary ?? '');
       }
     } catch {
       setFeedError('Network error. Please check your connection.');
@@ -206,6 +208,7 @@ export default function Home() {
         <section className="flex-1 p-5 overflow-y-auto">
           <NewsFeed
             items={feedItems}
+            executiveSummary={executiveSummary}
             loading={loading}
             holdings={holdings}
             error={feedError}

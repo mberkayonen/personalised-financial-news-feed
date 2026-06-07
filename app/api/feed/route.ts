@@ -83,31 +83,45 @@ ${portfolioSummary}
 ${articlesContext}
 
 ## Your Task
-Create a personalised newsfeed JSON array for this user. Requirements:
+Return a single JSON object with two fields: "executiveSummary" and "items".
+
+### executiveSummary
+Write 3–4 sentences summarising what has happened across the user's portfolio holdings based on the articles above.
+Rules:
+- Factual and neutral — describe what occurred, not what it means for the investor
+- Cover the most significant developments across holdings, weighted by portfolio size
+- No investment advice, no buy/sell signals, no forecasts, no value judgements
+- Plain English, no jargon
+- Do not use phrases like "you should", "consider", "opportunity", "risk to your portfolio"
+
+### items
+A JSON array of personalised news cards. Requirements:
 - Use ONLY the articles listed above — do not fabricate URLs or sources
 - Include 2 items per asset (pick the most relevant articles)
 - Include 2–3 macro/market items from the macro section
 - Order items by importance: highest portfolio weight assets first, macro items interspersed naturally
 - Write summaries in plain English for a retail investor — no jargon
-- Each relevanceTag must specifically mention the asset name and portfolio weight percentage, e.g. "You're seeing this because NVIDIA is your largest holding at 20% of your portfolio"
-- For macro items, relevanceTag should explain market-wide relevance, e.g. "This global event may affect equity markets across your portfolio"
+- Each relevanceTag must specifically mention the asset name and portfolio weight percentage
 - Do NOT provide investment advice or buy/sell recommendations
 - If no articles were found for an asset, skip that asset
 
-Return ONLY a valid JSON array, no other text:
-[
-  {
-    "id": "unique_string",
-    "headline": "Concise headline, max 12 words",
-    "summary": "Two sentences. Plain language. No jargon. Accessible to a first-time investor.",
-    "sourceUrl": "https://exact-url-from-articles-above",
-    "sourceName": "Publication name",
-    "relevanceTag": "One sentence explaining why user sees this item",
-    "assetId": "TICKER or macro",
-    "sentiment": "positive|negative|neutral",
-    "publishedAt": "ISO 8601 date string from article"
-  }
-]`;
+Return ONLY valid JSON, no other text:
+{
+  "executiveSummary": "3-4 sentence neutral summary of what happened across holdings.",
+  "items": [
+    {
+      "id": "unique_string",
+      "headline": "Concise headline, max 12 words",
+      "summary": "Two sentences. Plain language. No jargon. Accessible to a first-time investor.",
+      "sourceUrl": "https://exact-url-from-articles-above",
+      "sourceName": "Publication name",
+      "relevanceTag": "One sentence explaining why user sees this item",
+      "assetId": "TICKER or macro",
+      "sentiment": "positive|negative|neutral",
+      "publishedAt": "ISO 8601 date string from article"
+    }
+  ]
+}`;
 
     const message = await anthropic.messages.create({
       model: 'claude-haiku-4-5-20251001',
@@ -120,15 +134,17 @@ Return ONLY a valid JSON array, no other text:
       throw new Error('Unexpected Claude response type');
     }
 
-    // Extract JSON array from response
-    const jsonMatch = content.text.match(/\[[\s\S]*\]/);
+    // Extract JSON object from response
+    const jsonMatch = content.text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
-      throw new Error('No JSON array found in Claude response');
+      throw new Error('No JSON object found in Claude response');
     }
 
-    const items: NewsItem[] = JSON.parse(jsonMatch[0]);
+    const parsed = JSON.parse(jsonMatch[0]);
+    const items: NewsItem[] = parsed.items ?? [];
+    const executiveSummary: string = parsed.executiveSummary ?? '';
 
-    return NextResponse.json({ items });
+    return NextResponse.json({ items, executiveSummary });
   } catch (err) {
     console.error('[/api/feed] Error:', err);
     return NextResponse.json(
