@@ -67,7 +67,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#101112' }}>
+    <div className="h-screen flex flex-col overflow-hidden" style={{ backgroundColor: '#101112' }}>
       {/* Header */}
       <header
         className="flex items-center justify-between px-6 py-4 border-b"
