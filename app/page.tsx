@@ -5,6 +5,7 @@ import { PortfolioHolding, Asset, NewsItem } from '@/lib/types';
 import { ALL_ASSETS, DEFAULT_PORTFOLIO_IDS, getAssetById } from '@/lib/assets';
 import Portfolio from '@/components/Portfolio';
 import NewsFeed from '@/components/NewsFeed';
+import InvestorEvents from '@/components/InvestorEvents';
 
 // Rank-based weights: top asset gets most, all differ, none below 10%.
 // Formula: weight_i = 10 + extra * (N-1-rank) / triangularNumber(N-1)
@@ -148,6 +149,14 @@ export default function Home() {
             error={feedError}
           />
         </section>
+
+        {/* Investor Events panel */}
+        <aside
+          className="w-72 flex-shrink-0 p-5 overflow-y-auto"
+          style={{ borderLeft: '1px solid #1A1B1C' }}
+        >
+          <InvestorEvents holdings={holdings} />
+        </aside>
       </main>
 
       {/* Footer disclaimer */}
