@@ -41,7 +41,7 @@ export default function NewsCard({ item, holdings }: NewsCardProps) {
 
   return (
     <div
-      className="rounded-xl p-4 mb-3 transition-all duration-300"
+      className="rounded-xl p-4 transition-all duration-300"
       style={{
         backgroundColor: '#1A1B1C',
         borderLeft: `3px solid ${borderColor}`,

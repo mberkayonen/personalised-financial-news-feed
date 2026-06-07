@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { PortfolioHolding, Asset } from '@/lib/types';
 import { TYPE_COLORS, TYPE_LABELS, PORTFOLIO_TOTAL_EUR } from '@/lib/assets';
 
@@ -11,6 +12,32 @@ interface PortfolioProps {
   loading: boolean;
 }
 
+function AssetIcon({ holding }: { holding: PortfolioHolding }) {
+  const [imgFailed, setImgFailed] = useState(false);
+  const color = TYPE_COLORS[holding.type];
+
+  if (holding.logoUrl && !imgFailed) {
+    return (
+      <img
+        src={holding.logoUrl}
+        alt={holding.name}
+        className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+        style={{ backgroundColor: '#fff' }}
+        onError={() => setImgFailed(true)}
+      />
+    );
+  }
+
+  return (
+    <div
+      className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold"
+      style={{ backgroundColor: `${color}20`, color }}
+    >
+      {holding.ticker.replace('/', '').slice(0, 2)}
+    </div>
+  );
+}
+
 export default function Portfolio({
   holdings,
   availableToAdd,
@@ -18,14 +45,42 @@ export default function Portfolio({
   onRemove,
   loading,
 }: PortfolioProps) {
+  const weightedDailyChange = holdings.reduce(
+    (sum, h) => sum + (h.weight / 100) * h.dailyChangePct,
+    0
+  );
+  const isPortfolioPositive = weightedDailyChange >= 0;
+  const portfolioChangeColor = isPortfolioPositive ? '#6BDBCB' : '#F79880';
+
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="mb-5">
+      <div className="mb-4">
         <h2 className="text-white font-bold text-lg">Alex&apos;s Portfolio</h2>
         <p className="text-xs mt-0.5" style={{ color: '#404141' }}>
-          {holdings.length} asset{holdings.length !== 1 ? 's' : ''} · Equal weighting
+          {holdings.length} asset{holdings.length !== 1 ? 's' : ''} · Weighted
         </p>
+      </div>
+
+      {/* Total portfolio value */}
+      <div
+        className="rounded-xl p-3 mb-4"
+        style={{ backgroundColor: '#1A1B1C', border: '1px solid #2A2B2C' }}
+      >
+        <p className="text-xs mb-1" style={{ color: '#404141' }}>
+          Total Portfolio Value
+        </p>
+        <div className="flex items-end justify-between">
+          <span className="text-white font-bold text-xl tabular-nums">
+            €{PORTFOLIO_TOTAL_EUR.toLocaleString('de-DE')}
+          </span>
+          <span
+            className="text-sm font-semibold tabular-nums mb-0.5"
+            style={{ color: portfolioChangeColor }}
+          >
+            {isPortfolioPositive ? '+' : ''}{weightedDailyChange.toFixed(2)}% today
+          </span>
+        </div>
       </div>
 
       {/* Holdings list */}
@@ -42,21 +97,24 @@ export default function Portfolio({
               style={{ backgroundColor: '#1A1B1C', border: '1px solid #2A2B2C' }}
             >
               <div className="flex items-start justify-between mb-2">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="text-white font-semibold text-sm truncate">
-                      {holding.name}
-                    </span>
-                    <span
-                      className="text-xs px-1.5 py-0.5 rounded font-medium flex-shrink-0"
-                      style={{ backgroundColor: `${color}20`, color }}
-                    >
-                      {TYPE_LABELS[holding.type]}
+                <div className="flex items-center gap-2 flex-1 min-w-0">
+                  <AssetIcon holding={holding} />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <span className="text-white font-semibold text-sm truncate">
+                        {holding.name}
+                      </span>
+                      <span
+                        className="text-xs px-1.5 py-0.5 rounded font-medium flex-shrink-0"
+                        style={{ backgroundColor: `${color}20`, color }}
+                      >
+                        {TYPE_LABELS[holding.type]}
+                      </span>
+                    </div>
+                    <span className="text-xs" style={{ color: '#404141' }}>
+                      {holding.ticker}
                     </span>
                   </div>
-                  <span className="text-xs" style={{ color: '#404141' }}>
-                    {holding.ticker}
-                  </span>
                 </div>
                 <button
                   onClick={() => onRemove(holding.id)}
@@ -94,10 +152,7 @@ export default function Portfolio({
                 >
                   <div
                     className="h-full rounded-full transition-all duration-500"
-                    style={{
-                      width: `${holding.weight}%`,
-                      backgroundColor: color,
-                    }}
+                    style={{ width: `${holding.weight}%`, backgroundColor: color }}
                   />
                 </div>
                 <span

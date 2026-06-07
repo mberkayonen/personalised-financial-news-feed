@@ -13,7 +13,7 @@ interface NewsFeedProps {
 function SkeletonCard() {
   return (
     <div
-      className="rounded-xl p-4 mb-3 animate-pulse"
+      className="rounded-xl p-4 animate-pulse"
       style={{ backgroundColor: '#1A1B1C', border: '1px solid #2A2B2C' }}
     >
       <div className="flex gap-2 mb-3">
@@ -65,17 +65,17 @@ export default function NewsFeed({ items, loading, holdings, error }: NewsFeedPr
 
       {/* Skeleton loading */}
       {loading && items.length === 0 && (
-        <>
+        <div className="grid grid-cols-2 gap-3">
           <SkeletonCard />
           <SkeletonCard />
           <SkeletonCard />
           <SkeletonCard />
-        </>
+        </div>
       )}
 
       {/* Feed items with optional loading overlay */}
       {items.length > 0 && (
-        <div className={`transition-opacity duration-300 ${loading ? 'opacity-40' : 'opacity-100'}`}>
+        <div className={`grid grid-cols-2 gap-3 transition-opacity duration-300 ${loading ? 'opacity-40' : 'opacity-100'}`}>
           {items.map((item) => (
             <NewsCard key={item.id} item={item} holdings={holdings} />
           ))}

@@ -29,6 +29,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'Apple Inc AAPL stock',
     dailyChangePct: 1.2,
+    logoUrl: 'https://logo.clearbit.com/apple.com',
   },
   {
     id: 'NVDA',
@@ -37,6 +38,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'NVIDIA NVDA stock earnings',
     dailyChangePct: 3.4,
+    logoUrl: 'https://logo.clearbit.com/nvidia.com',
   },
   {
     id: 'IWDA',
@@ -45,6 +47,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'etf',
     searchQuery: 'MSCI World ETF global equities',
     dailyChangePct: 0.6,
+    logoUrl: 'https://logo.clearbit.com/ishares.com',
   },
   {
     id: 'BTC',
@@ -53,6 +56,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'crypto',
     searchQuery: 'Bitcoin cryptocurrency price',
     dailyChangePct: -2.1,
+    logoUrl: 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png',
   },
   {
     id: 'EURUSD',
@@ -70,6 +74,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'SAP SE enterprise software stock',
     dailyChangePct: 0.8,
+    logoUrl: 'https://logo.clearbit.com/sap.com',
   },
   {
     id: 'VOW3',
@@ -78,6 +83,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'Volkswagen automotive stock',
     dailyChangePct: -1.5,
+    logoUrl: 'https://logo.clearbit.com/volkswagen.com',
   },
   {
     id: 'SPY',
@@ -86,6 +92,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'etf',
     searchQuery: 'S&P 500 index ETF US equities',
     dailyChangePct: 0.7,
+    logoUrl: 'https://logo.clearbit.com/ssga.com',
   },
   {
     id: 'ETH',
@@ -94,6 +101,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'crypto',
     searchQuery: 'Ethereum cryptocurrency ETH',
     dailyChangePct: 4.2,
+    logoUrl: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
   },
   {
     id: 'AMZN',
@@ -102,6 +110,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'Amazon AMZN stock AWS',
     dailyChangePct: -0.4,
+    logoUrl: 'https://logo.clearbit.com/amazon.com',
   },
   {
     id: 'TSLA',
@@ -110,6 +119,7 @@ export const ALL_ASSETS: Asset[] = [
     type: 'stock',
     searchQuery: 'Tesla TSLA electric vehicle stock',
     dailyChangePct: 2.8,
+    logoUrl: 'https://logo.clearbit.com/tesla.com',
   },
   {
     id: 'DE10Y',
