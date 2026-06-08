@@ -8,6 +8,7 @@ interface NewsFeedProps {
   executiveSummary: string;
   loading: boolean;
   holdings: PortfolioHolding[];
+  recentlyAddedIds: Set<string>;
   error?: string;
 }
 
@@ -30,7 +31,7 @@ function SkeletonCard() {
   );
 }
 
-export default function NewsFeed({ items, executiveSummary, loading, holdings, error }: NewsFeedProps) {
+export default function NewsFeed({ items, executiveSummary, loading, holdings, recentlyAddedIds, error }: NewsFeedProps) {
   return (
     <div className="flex flex-col h-full">
       {/* Feed header */}
@@ -108,7 +109,7 @@ export default function NewsFeed({ items, executiveSummary, loading, holdings, e
       {items.length > 0 && (
         <div className={`grid grid-cols-2 gap-3 transition-opacity duration-300 ${loading ? 'opacity-40' : 'opacity-100'}`}>
           {items.map((item) => (
-            <NewsCard key={item.id} item={item} holdings={holdings} />
+            <NewsCard key={item.id} item={item} holdings={holdings} recentlyAddedIds={recentlyAddedIds} />
           ))}
         </div>
       )}

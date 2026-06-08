@@ -27,6 +27,7 @@ function buildHoldings(assetIds: string[]): PortfolioHolding[] {
 
 export default function Home() {
   const [portfolioIds, setPortfolioIds] = useState<string[]>(DEFAULT_PORTFOLIO_IDS);
+  const [recentlyAddedIds, setRecentlyAddedIds] = useState<Set<string>>(new Set());
   const [disclaimerOpen, setDisclaimerOpen] = useState(false);
   const [feedItems, setFeedItems] = useState<NewsItem[]>([]);
   const [executiveSummary, setExecutiveSummary] = useState<string>('');
@@ -74,6 +75,7 @@ export default function Home() {
 
   const handleAdd = (asset: Asset) => {
     setPortfolioIds((prev) => [...prev, asset.id]);
+    setRecentlyAddedIds((prev) => new Set(prev).add(asset.id));
   };
 
   const handleRemove = (assetId: string) => {
@@ -217,6 +219,7 @@ export default function Home() {
             executiveSummary={executiveSummary}
             loading={loading}
             holdings={holdings}
+            recentlyAddedIds={recentlyAddedIds}
             error={feedError}
           />
         </section>

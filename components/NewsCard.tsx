@@ -7,19 +7,8 @@ import { PortfolioHolding } from '@/lib/types';
 interface NewsCardProps {
   item: NewsItem;
   holdings: PortfolioHolding[];
+  recentlyAddedIds: Set<string>;
 }
-
-const SENTIMENT_BORDER: Record<string, string> = {
-  positive: '#6BDBCB',  // Emerald
-  negative: '#F79880',  // Blush
-  neutral: '#404141',   // Woodsmoke-80
-};
-
-const SENTIMENT_LABEL: Record<string, string> = {
-  positive: '↑',
-  negative: '↓',
-  neutral: '→',
-};
 
 function formatDate(iso: string): string {
   try {
@@ -33,21 +22,21 @@ function formatDate(iso: string): string {
   }
 }
 
-export default function NewsCard({ item, holdings }: NewsCardProps) {
+export default function NewsCard({ item, holdings, recentlyAddedIds }: NewsCardProps) {
   const holding = holdings.find((h) => h.id === item.assetId);
   const typeColor = holding ? TYPE_COLORS[holding.type] : '#CFCFD0';
-  const borderColor = SENTIMENT_BORDER[item.sentiment] ?? SENTIMENT_BORDER.neutral;
-  const sentimentIcon = SENTIMENT_LABEL[item.sentiment] ?? '→';
+
+  const isRecentlyAdded = holding != null && recentlyAddedIds.has(holding.id);
+  const relevanceText = isRecentlyAdded
+    ? `You recently added ${holding!.name} to your portfolio`
+    : item.relevanceTag;
 
   return (
     <div
       className="rounded-xl p-4 transition-all duration-300"
       style={{
         backgroundColor: '#1A1B1C',
-        borderLeft: `3px solid ${borderColor}`,
-        border: `1px solid #2A2B2C`,
-        borderLeftWidth: '3px',
-        borderLeftColor: borderColor,
+        border: '1px solid #2A2B2C',
       }}
     >
       {/* Asset tag + sentiment + date */}
@@ -102,7 +91,7 @@ export default function NewsCard({ item, holdings }: NewsCardProps) {
           <rect x="5.5" y="5" width="1" height="4" fill="#B5BAD7" />
           <circle cx="6" cy="3.5" r="0.75" fill="#B5BAD7" />
         </svg>
-        <span>{item.relevanceTag}</span>
+        <span>{relevanceText}</span>
       </div>
 
       {/* Source link */}
