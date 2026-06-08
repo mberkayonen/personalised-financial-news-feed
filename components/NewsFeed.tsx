@@ -108,7 +108,15 @@ export default function NewsFeed({ items, executiveSummary, loading, holdings, r
       {/* Feed items with optional loading overlay */}
       {items.length > 0 && (
         <div className={`grid grid-cols-2 gap-3 transition-opacity duration-300 ${loading ? 'opacity-40' : 'opacity-100'}`}>
-          {items.map((item) => (
+          {[...items]
+            .sort((a, b) => {
+              const aRecent = recentlyAddedIds.has(a.assetId);
+              const bRecent = recentlyAddedIds.has(b.assetId);
+              if (aRecent && !bRecent) return -1;
+              if (!aRecent && bRecent) return 1;
+              return 0;
+            })
+            .map((item) => (
             <NewsCard key={item.id} item={item} holdings={holdings} recentlyAddedIds={recentlyAddedIds} />
           ))}
         </div>

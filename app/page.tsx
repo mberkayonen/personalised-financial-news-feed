@@ -76,6 +76,7 @@ export default function Home() {
   const handleAdd = (asset: Asset) => {
     setPortfolioIds((prev) => [...prev, asset.id]);
     setRecentlyAddedIds((prev) => new Set(prev).add(asset.id));
+    setExecutiveSummary('');
   };
 
   const handleRemove = (assetId: string) => {
