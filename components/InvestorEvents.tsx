@@ -13,7 +13,7 @@ interface InvestorEventsProps {
   holdings: PortfolioHolding[];
 }
 
-const TODAY = new Date('2026-06-07');
+const TODAY = new Date(new Date().toDateString());
 
 function formatRelativeDate(isoDate: string): { label: string; isUpcoming: boolean } {
   const d = new Date(isoDate);

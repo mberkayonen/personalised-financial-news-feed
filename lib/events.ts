@@ -318,7 +318,7 @@ export const ALL_EVENTS: InvestorEvent[] = [
 ];
 
 export function getEventsForHoldings(assetIds: string[]): InvestorEvent[] {
-  const today = new Date('2026-06-07');
+  const today = new Date(new Date().toDateString());
   const sixMonthsAgo = new Date(today);
   sixMonthsAgo.setMonth(today.getMonth() - 2);
   const sixMonthsAhead = new Date(today);
