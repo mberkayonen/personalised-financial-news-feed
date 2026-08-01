@@ -1,6 +1,6 @@
-# Scalable Capital – Personalised Investment Feed (POC)
+# Personalised Financial News Feed (POC)
 
-A proof-of-concept for a portfolio-weighted AI newsfeed, built for the Scalable Capital PM assignment.
+A proof-of-concept for a portfolio-weighted AI newsfeed that surfaces relevant financial news based on a user's holdings.
 
 ## Setup
 
@@ -12,7 +12,6 @@ A proof-of-concept for a portfolio-weighted AI newsfeed, built for the Scalable 
 ### 2. Install dependencies
 
 ```bash
-cd scalable-feed
 npm install
 ```
 
@@ -56,7 +55,7 @@ vercel deploy --prod
 ```
 app/
   page.tsx          # Main page — state management, layout
-  globals.css       # Scalable brand tokens + Inter font
+  globals.css       # Brand tokens + Inter font
   api/feed/
     route.ts        # Serverless function: NewsAPI → Claude → JSON feed
 components/
